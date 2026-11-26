@@ -1,0 +1,38 @@
+baseURL = "https://audiolibrelab.github.io/"
+languageCode = "en"
+title = "AudioLibreLab"
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[markup.goldmark.renderer]
+unsafe = true
+
+# Notes (harmony, guitar, bass, rhythm) come from the public music-notes repository (no copy).
+# In CI, music-notes is cloned next to this repository (see the workflow).
+[markup.goldmark.renderHooks.link]
+useEmbedded = "fallback"
+
+[module]
+[[module.mounts]]
+source = "content"
+target = "content"
+[[module.mounts]]
+source = "../music-notes"
+target = "content/notes"
+excludeFiles = ["README.md", "LICENSE", ".git/**", "tools/**"]
+[[module.mounts]]
+source = "../music-notes/README.md"
+target = "content/notes/_index.md"
+
+[menus]
+[[menus.main]]
+name = "Projects"
+url = "/projects/"
+weight = 1
+[[menus.main]]
+name = "Notes"
+url = "/notes/"
+weight = 2
+[[menus.main]]
+name = "Grooves"
+url = "/notes/rhythm/groove-scribe-grooves/"
+weight = 3

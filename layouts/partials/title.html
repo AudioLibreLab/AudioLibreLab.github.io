@@ -1,0 +1,4 @@
+{{- $t := .Title -}}
+{{- if and (not $t) .File -}}{{- $t = .File.ContentBaseName | humanize -}}{{- end -}}
+{{- if and (not $t) .Section -}}{{- $t = .Section | humanize -}}{{- end -}}
+{{- return $t -}}

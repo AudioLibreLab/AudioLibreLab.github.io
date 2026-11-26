@@ -1,0 +1,8 @@
+{{ partial "head.html" . }}
+<article>
+{{ with .Title }}<h1>{{ . }}</h1>{{ end }}
+{{ partial "maturity.html" . }}
+{{ .Content }}
+{{ with .Params.repo }}<p><a class="btn" href="{{ . }}">View the repository →</a></p>{{ end }}
+</article>
+{{ partial "foot.html" . }}

@@ -1,0 +1,8 @@
+{{- /* Relative images written for GitHub: resolved from the source file folder. */ -}}
+{{- $src := .Destination -}}
+{{- $u := urls.Parse $src -}}
+{{- if and (not $u.Scheme) (not (hasPrefix $src "/")) .Page.File -}}
+  {{- $src = printf "/%s" (path.Clean (path.Join .Page.File.Dir $u.Path)) | relURL -}}
+{{- end -}}
+<img src="{{ $src | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
+{{- /**/ -}}

@@ -1,0 +1,9 @@
+{{ partial "head.html" . }}
+<section class="hero"><h1>{{ site.Title }}</h1>{{ .Content }}</section>
+<div class="cards">
+{{ range (site.GetPage "/projects").Pages.ByWeight }}
+  <a class="card" href="{{ .RelPermalink }}"><h3>{{ .Title }}</h3>{{ partial "maturity.html" . }}<p>{{ .Summary | plainify | truncate 140 }}</p></a>
+{{ end }}
+</div>
+<p class="more"><a href="{{ "/notes/" | relURL }}">Practice notes: harmony, guitar, bass, rhythm →</a></p>
+{{ partial "foot.html" . }}

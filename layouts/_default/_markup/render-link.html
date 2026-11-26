@@ -1,0 +1,17 @@
+{{- /* Relative links written for GitHub: .md -> Hugo page, other file -> published file,
+       outside the content (e.g. tools/) -> music-notes repository on GitHub. */ -}}
+{{- $dest := .Destination -}}
+{{- $u := urls.Parse $dest -}}
+{{- if and (not $u.Scheme) (not (hasPrefix $dest "/")) (not (hasPrefix $dest "#")) .Page.File -}}
+  {{- $path := path.Clean (path.Join .Page.File.Dir $u.Path) -}}
+  {{- if strings.HasSuffix $u.Path ".md" -}}
+    {{- with site.GetPage $path -}}{{- $dest = .RelPermalink -}}{{- end -}}
+  {{- else if and (hasPrefix $path "notes/") (not (hasPrefix $path "notes/tools")) -}}
+    {{- $dest = printf "/%s" $path | relURL -}}
+  {{- else if hasPrefix $path "notes/" -}}
+    {{- $dest = printf "https://github.com/AudioLibreLab/music-notes/blob/main/%s" (strings.TrimPrefix "notes/" $path) -}}
+  {{- end -}}
+  {{- with $u.Fragment -}}{{- $dest = printf "%s#%s" $dest . -}}{{- end -}}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix $dest "http" }} rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- /**/ -}}

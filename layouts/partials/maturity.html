@@ -1,0 +1,7 @@
+{{- with .Params.maturity -}}
+{{- if eq . "used" -}}
+<span class="badge used" title="Used regularly by its author, who is so far its only user">In regular use · single user</span>
+{{- else -}}
+<span class="badge experimental" title="Early stage: works for its author, may change or break">Experimental</span>
+{{- end -}}
+{{- end -}}
