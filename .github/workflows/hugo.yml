@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  repository_dispatch:
+    types: [music-notes-updated]
 permissions:
   contents: read
   pages: write
